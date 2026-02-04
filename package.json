@@ -1,0 +1,51 @@
+{
+  "name": "uni-inject",
+  "private": true,
+  "packageManager": "pnpm@10.25.0",
+  "scripts": {
+    "prepare": "husky",
+    "commit": "czg",
+    "format": "prettier --write .",
+    "lint": "pnpm -r lint",
+    "lint:es": "eslint --fix",
+    "lint:style": "stylelint **/*.{vue,css,scss} --fix",
+    "dev:demo": "pnpm -F demo dev",
+    "build:inject": "pnpm -F vite-plugin-uni-inject build",
+    "release:inject": "pnpm build:inject && pnpm -F vite-plugin-uni-inject release"
+  },
+  "devDependencies": {
+    "@kriac/commitlint-config": "catalog:",
+    "@kriac/eslint-config": "catalog:",
+    "@kriac/stylelint-config": "catalog:",
+    "commitlint": "catalog:",
+    "czg": "catalog:",
+    "eslint": "catalog:",
+    "husky": "catalog:",
+    "lint-staged": "catalog:",
+    "prettier": "catalog:",
+    "stylelint": "catalog:"
+  },
+  "config": {
+    "commitizen": {
+      "czConfig": "commitlint.config.mjs"
+    }
+  },
+  "lint-staged": {
+    "*.vue": [
+      "eslint --fix",
+      "stylelint --fix",
+      "prettier --write"
+    ],
+    "*.{js,ts,jsx,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,scss}": [
+      "stylelint --fix",
+      "prettier --write"
+    ],
+    "*.{json,yaml,md}": [
+      "prettier --write"
+    ]
+  }
+}

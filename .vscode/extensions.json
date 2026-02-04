@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "vscode-icons-team.vscode-icons",
+    "vue.volar",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint"
+  ]
+}

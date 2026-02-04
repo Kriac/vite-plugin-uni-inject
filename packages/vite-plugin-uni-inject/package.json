@@ -1,0 +1,40 @@
+{
+  "name": "vite-plugin-uni-inject",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "vite-plugin-uni-inject",
+  "author": "Kriac",
+  "homepage": "https://github.com/Kriac/vite-plugin-uni-inject",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kriac/vite-plugin-uni-inject.git"
+  },
+  "keywords": [
+    "uniapp",
+    "uni-inject"
+  ],
+  "scripts": {
+    "lint": "vue-tsc -b --noEmit",
+    "build": "tsup",
+    "release": "npm publish --access public"
+  },
+  "dependencies": {
+    "@vue/compiler-sfc": "3.5.27"
+  },
+  "devDependencies": {
+    "@types/node": "25.0.10",
+    "tsup": "8.5.1",
+    "vue-tsc": "3.2.1"
+  },
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  }
+}
