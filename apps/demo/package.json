@@ -1,7 +1,6 @@
 {
   "name": "demo",
   "private": true,
-  "type": "module",
   "scripts": {
     "lint": "vue-tsc -b --noEmit",
     "dev": "uni -p mp-weixin",
