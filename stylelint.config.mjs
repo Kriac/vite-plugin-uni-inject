@@ -1,3 +1,3 @@
 export default {
-  extends: ["@kriac/stylelint-config"],
+  extends: ["@kriac/lint-kit/stylelint"],
 };
