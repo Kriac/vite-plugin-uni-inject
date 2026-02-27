@@ -14,9 +14,7 @@
     "release:inject": "pnpm build:inject && pnpm -F vite-plugin-uni-inject release"
   },
   "devDependencies": {
-    "@kriac/commitlint-config": "catalog:",
-    "@kriac/eslint-config": "catalog:",
-    "@kriac/stylelint-config": "catalog:",
+    "@kriac/lint-kit": "catalog:",
     "commitlint": "catalog:",
     "czg": "catalog:",
     "eslint": "catalog:",

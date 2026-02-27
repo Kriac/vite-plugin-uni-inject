@@ -1,4 +1,4 @@
-import config from "@kriac/commitlint-config";
+import config from "@kriac/lint-kit/commitlint";
 
 export default config({
   scopes: [],

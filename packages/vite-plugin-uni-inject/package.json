@@ -1,9 +1,10 @@
 {
   "name": "vite-plugin-uni-inject",
-  "type": "module",
-  "version": "0.1.0",
   "description": "vite-plugin-uni-inject",
   "author": "Kriac",
+  "license": "MIT",
+  "type": "module",
+  "version": "0.1.0",
   "homepage": "https://github.com/Kriac/vite-plugin-uni-inject",
   "repository": {
     "type": "git",
@@ -15,7 +16,7 @@
   ],
   "scripts": {
     "lint": "vue-tsc -b --noEmit",
-    "build": "tsup",
+    "build": "tsdown",
     "release": "npm publish --access public"
   },
   "dependencies": {
@@ -23,17 +24,16 @@
   },
   "devDependencies": {
     "@types/node": "25.0.10",
-    "tsup": "8.5.1",
+    "tsdown": "0.20.3",
     "vue-tsc": "3.2.1"
   },
-  "license": "MIT",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     }
   }

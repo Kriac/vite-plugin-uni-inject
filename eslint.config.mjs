@@ -1,4 +1,4 @@
-import config from "@kriac/eslint-config";
+import config from "@kriac/lint-kit/eslint";
 
 export default config({
   ignores: [],
