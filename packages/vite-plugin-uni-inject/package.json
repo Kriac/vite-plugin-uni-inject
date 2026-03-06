@@ -20,11 +20,13 @@
     "release": "npm publish --access public"
   },
   "dependencies": {
-    "@vue/compiler-sfc": "3.5.27"
+    "@vue/compiler-sfc": "3.5.27",
+    "@babel/parser": "7.29.0",
+    "magic-string": "0.30.21"
   },
   "devDependencies": {
     "@types/node": "25.0.10",
-    "tsdown": "0.20.3",
+    "tsdown": "0.21.0",
     "vue-tsc": "3.2.1"
   },
   "files": [
