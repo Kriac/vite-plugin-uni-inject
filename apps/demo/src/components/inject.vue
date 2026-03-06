@@ -1,9 +1,10 @@
 <script setup lang="ts">
-console.log("Hello Inject");
+import { sayHello } from "@/libs/hello";
+
+console.log(sayHello());
 </script>
 
 <template>
-  <!-- <page-meta :page-style="" /> -->
   <wd-toast selector="page-toast" />
 </template>
 
