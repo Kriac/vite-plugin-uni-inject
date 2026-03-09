@@ -4,15 +4,14 @@
   "author": "Kriac",
   "license": "MIT",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "homepage": "https://github.com/Kriac/vite-plugin-uni-inject",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Kriac/vite-plugin-uni-inject.git"
   },
   "keywords": [
-    "uniapp",
-    "uni-inject"
+    "vite-plugin-uni-inject"
   ],
   "scripts": {
     "lint": "vue-tsc -b --noEmit",
