@@ -91,7 +91,7 @@ export default function (opts?: PluginOptions) {
         const start = descriptor.scriptSetup.loc.start.offset;
         newCode =
           newCode.slice(0, start) +
-          `\n${injectScriptSetup}\n` +
+          `\n${injectScriptSetup}` +
           newCode.slice(start);
       }
 
@@ -109,11 +109,11 @@ export default function (opts?: PluginOptions) {
           plugins: ["typescript"],
         });
 
-        const imports = [];
+        const imports: string[] = [];
         for (const node of ast.program.body) {
           if (node.type === "ImportDeclaration") {
             imports.push(code.slice(node.start!, node.end!));
-            s.remove(node.start!, node.end!);
+            s.remove(node.start!, node.end! + 1);
           }
         }
         if (imports.length) {
