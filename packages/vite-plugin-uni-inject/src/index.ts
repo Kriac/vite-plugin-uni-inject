@@ -1,12 +1,17 @@
-import type { PluginOptions, UniPage, UniPagesJson } from "./types";
-import { parse } from "@vue/compiler-sfc";
+import type { PluginOptions, UniPagesJson, UniPage } from "./types";
+import { parse } from "@babel/parser";
+import { parse as parseSFC } from "@vue/compiler-sfc";
 import fs from "fs";
 import path from "path";
+import MagicString from "magic-string";
 
 export default function (opts?: PluginOptions) {
   const { injectPath = "App.inject.vue" } = opts || {};
 
+  // 页面集合
   const pageSet = new Set<string>();
+
+  // 注入内容
   let injectTemplate = "";
   let injectScriptSetup = "";
 
@@ -23,14 +28,6 @@ export default function (opts?: PluginOptions) {
       if (!fs.existsSync(injPath)) {
         return;
       }
-      const content: string = fs.readFileSync(injPath, "utf-8");
-      const { descriptor } = parse(content);
-      if (descriptor.template) {
-        injectTemplate = descriptor.template.content.trim();
-      }
-      if (descriptor.scriptSetup) {
-        injectScriptSetup = descriptor.scriptSetup.content.trim();
-      }
 
       // 读取 pages.json 文件
       const pagesJsonPath = path.join(srcRoot, "pages.json");
@@ -38,9 +35,20 @@ export default function (opts?: PluginOptions) {
         return;
       }
 
+      // 保存注入内容
+      const content = fs.readFileSync(injPath, "utf-8");
+      const { descriptor } = parseSFC(content);
+      if (descriptor.template) {
+        injectTemplate = descriptor.template.content.trim();
+      }
+      if (descriptor.scriptSetup) {
+        injectScriptSetup = descriptor.scriptSetup.content.trim();
+      }
+
       // 收集页面文件
-      const pagesJsonContent: string = fs.readFileSync(pagesJsonPath, "utf-8");
+      const pagesJsonContent = fs.readFileSync(pagesJsonPath, "utf-8");
       const pagesJson: UniPagesJson = JSON.parse(pagesJsonContent);
+      const subPackages = pagesJson.subPackages ?? [];
       const collectPages = (pages: UniPage[], rootDir = ""): void => {
         pages.forEach((page) => {
           const pageVuePath = path.join(srcRoot, rootDir, `${page.path}.vue`);
@@ -48,7 +56,6 @@ export default function (opts?: PluginOptions) {
         });
       };
       collectPages(pagesJson.pages);
-      const subPackages = pagesJson.subPackages ?? [];
       subPackages.forEach((sub) => {
         collectPages(sub.pages, sub.root);
       });
@@ -65,8 +72,9 @@ export default function (opts?: PluginOptions) {
         return;
       }
 
-      const { descriptor } = parse(code);
       let newCode = code;
+
+      const { descriptor } = parseSFC(code);
 
       // 注入 template
       if (injectTemplate && descriptor.template) {
@@ -83,13 +91,40 @@ export default function (opts?: PluginOptions) {
         const start = descriptor.scriptSetup.loc.start.offset;
         newCode =
           newCode.slice(0, start) +
-          `\n${injectScriptSetup}\n` +
+          `\n${injectScriptSetup}` +
           newCode.slice(start);
+      }
+
+      const { descriptor: newDescriptor } = parseSFC(newCode);
+
+      // 处理 script setup
+      if (newDescriptor.scriptSetup) {
+        const start = newDescriptor.scriptSetup.loc.start.offset;
+        const end = newDescriptor.scriptSetup.loc.end.offset;
+        const code = newDescriptor.scriptSetup.content;
+
+        const s = new MagicString(code);
+        const ast = parse(code, {
+          sourceType: "module",
+          plugins: ["typescript"],
+        });
+
+        const imports: string[] = [];
+        for (const node of ast.program.body) {
+          if (node.type === "ImportDeclaration") {
+            imports.push(code.slice(node.start!, node.end!));
+            s.remove(node.start!, node.end! + 1);
+          }
+        }
+        if (imports.length) {
+          s.prepend("\n" + imports.join("\n"));
+        }
+
+        newCode = newCode.slice(0, start) + s.toString() + newCode.slice(end);
       }
 
       return {
         code: newCode,
-        map: null,
       };
     },
   };
