@@ -109,12 +109,12 @@ importers:
         version: 5.2.8(@types/node@25.0.10)(sass@1.78.0)(terser@5.46.0)
       vite-plugin-uni-inject:
         specifier: workspace:*
-        version: link:../../packages/vite-plugin-uni-inject
+        version: link:../../packages/uni-inject
       vue-tsc:
         specifier: "catalog:"
         version: 3.2.1(typescript@5.9.3)
 
-  packages/vite-plugin-uni-inject:
+  packages/uni-inject:
     dependencies:
       "@babel/parser":
         specifier: 7.29.0
