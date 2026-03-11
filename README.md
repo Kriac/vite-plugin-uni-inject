@@ -1,6 +1,6 @@
 # vite-plugin-uni-inject
 
-利用 Vite 插件机制，解决 uniapp 项目中无法使用公共组件的问题。
+利用 Vite 插件机制，实现自动注入代码，解放你的双手。
 
 ## 使用
 
@@ -16,13 +16,13 @@ pnpm i -D vite-plugin-uni-inject
 
 ```ts
 import { defineConfig } from "vite";
+import { uniAutoPages, uniInject } from "vite-plugin-uni-inject";
 import uni from "@dcloudio/vite-plugin-uni";
-import uniInject from "vite-plugin-uni-inject";
 
 // 如果有重写 page.json 文件的插件，请确保写在 uniInject 之前
 export default defineConfig(() => {
   return {
-    plugins: [uniInject(), uni()],
+    plugins: [uniAutoPages(), uniInject(), uni()],
   };
 });
 ```
