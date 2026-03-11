@@ -6,9 +6,9 @@ export default defineConfig(() => {
   return {
     plugins: [
       uniAutoPages({
+        dts: "./types/uni-pages.d.ts",
         dir: "pages",
         subPackages: ["subPackages/tutorial"],
-        dts: "./types/uni-pages.d.ts",
       }),
       uniInject({
         path: "./components/inject.vue",

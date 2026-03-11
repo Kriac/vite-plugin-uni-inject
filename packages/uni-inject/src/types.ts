@@ -20,13 +20,19 @@ export interface UniPagesJson {
 export interface InjectPluginOptions {
   /**
    * 注入的文件路径
-   * @default 'src/App.inject.vue'
+   * @default './App.inject.vue'
    */
   path?: string;
 }
 
 /** 自动补全 pages 插件配置 */
 export interface AutoPagesPluginOptions {
+  /**
+   * 输出类型
+   * @default './uni-pages.d.ts'
+   */
+  dts?: string;
+
   /**
    * 扫描目录
    * @default 'pages'
@@ -38,10 +44,4 @@ export interface AutoPagesPluginOptions {
    * @default []
    */
   subPackages?: string[];
-
-  /**
-   * 生成类型声明
-   * @default 'src/uni-pages.d.ts'
-   */
-  dts?: string;
 }
