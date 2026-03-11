@@ -16,6 +16,22 @@
       "style": {
         "disableScroll": true
       }
+    },
+    {
+      "path": "pages/more/test"
+    }
+  ],
+  "subPackages": [
+    {
+      "root": "subPackages/tutorial",
+      "pages": [
+        {
+          "path": "pages/index/index"
+        },
+        {
+          "path": "pages/more/inject"
+        }
+      ]
     }
   ]
 }

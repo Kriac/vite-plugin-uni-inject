@@ -1,12 +1,17 @@
 import { defineConfig } from "vite";
+import { uniAutoPages, uniInject } from "vite-plugin-uni-inject";
 import uni from "@dcloudio/vite-plugin-uni";
-import uniInject from "vite-plugin-uni-inject";
 
 export default defineConfig(() => {
   return {
     plugins: [
+      uniAutoPages({
+        dir: "pages",
+        subPackages: ["subPackages/tutorial"],
+        dts: "./types/uni-pages.d.ts",
+      }),
       uniInject({
-        injectPath: "./components/inject.vue",
+        path: "./components/inject.vue",
       }),
       uni(),
     ],

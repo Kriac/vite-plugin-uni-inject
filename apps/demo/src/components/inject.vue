@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { sayHello } from "@/libs/hello";
+import { sayHelloInject } from "@/libs/utils";
 
-console.log(sayHello());
+console.log(sayHelloInject());
 </script>
 
 <template>
