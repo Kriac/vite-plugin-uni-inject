@@ -105,6 +105,9 @@ function getPagesByFileRoute(
   pagesJson: UniPagesJson,
   subPackageRoots: string[],
 ) {
+  const originPages = pagesJson.pages ?? [];
+  const originSubPackages = pagesJson.subPackages ?? [];
+
   // 将路由按主包和分包进行分类
   const mainRoutes: string[] = [];
   const subRouteMap = new Map<string, string[]>();
@@ -123,14 +126,19 @@ function getPagesByFileRoute(
     }
   }
 
-  // 合并主包页面
-  const pages = mergePages(mainRoutes, pagesJson.pages ?? []);
+  // 保持首页固定
+  const homePage = originPages[0]?.path;
+  if (mainRoutes.includes(homePage)) {
+    const idx = mainRoutes.indexOf(homePage);
+    mainRoutes.splice(idx, 1);
+    mainRoutes.unshift(homePage);
+  }
 
-  // 合并分包页面
-  const existSubs = pagesJson.subPackages ?? [];
+  // 合并页面配置
+  const pages = mergePages(mainRoutes, originPages);
   const subPackages = normalizedSubRoots.map((root) => {
     const subRoutes = subRouteMap.get(root) ?? [];
-    const existing = existSubs.find((s) => {
+    const existing = originSubPackages.find((s) => {
       return normalizeDir(s.root) === root;
     });
     return {
