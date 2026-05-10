@@ -3,22 +3,23 @@ packages:
   - packages/*
 
 catalog:
-  "@dcloudio/uni-app": "3.0.0-4080720251210001"
-  "@dcloudio/uni-mp-weixin": "3.0.0-4080720251210001"
-  "@dcloudio/vite-plugin-uni": "3.0.0-4080720251210001"
-  "@kriac/lint-kit": "0.0.1"
-  "commitlint": "20.3.0"
-  "czg": "1.12.0"
-  "eslint": "9.39.2"
-  "husky": "9.1.7"
-  "lint-staged": "16.2.7"
-  "prettier": "3.7.2"
-  "sass": "1.78.0"
-  "stylelint": "17.0.0"
-  "wot-design-uni": "1.14.0"
-  "vite": "5.2.8"
-  "vue": "3.4.21"
-  "vue-tsc": "3.2.1"
+  "@dcloudio/uni-app": 3.0.0-4080720251210001
+  "@dcloudio/uni-mp-weixin": 3.0.0-4080720251210001
+  "@dcloudio/vite-plugin-uni": 3.0.0-4080720251210001
+  "@kriac/lint-kit": 0.1.0
+  "@tdesign/uniapp": 0.9.0
+  "commitlint": 20.3.0
+  "czg": 1.13.0
+  "eslint": 9.39.4
+  "husky": 9.1.7
+  "lint-staged": 16.4.0
+  "prettier": 3.7.2
+  "sass": 1.78.0
+  "stylelint": 17.8.0
+  "vite": 5.2.8
+  "vue": 3.4.21
+  "vue-tsc": 3.2.1
+  "typescript": 5.8.2
 
 onlyBuiltDependencies:
   - core-js
