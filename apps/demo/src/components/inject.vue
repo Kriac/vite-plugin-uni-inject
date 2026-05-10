@@ -5,7 +5,7 @@ console.log(sayHelloInject());
 </script>
 
 <template>
-  <wd-toast selector="page-toast" />
+  <t-toast ref="t-toast" />
 </template>
 
 <style scoped lang="scss"></style>

@@ -6,7 +6,7 @@ const back = () => {
 </script>
 
 <template>
-  <wd-navbar
+  <t-navbar
     safe-area-inset-top
     left-arrow
     title="注入示例"

@@ -2,7 +2,7 @@
   "easycom": {
     "autoscan": false,
     "custom": {
-      "^wd-(.*)": "wot-design-uni/components/wd-$1/wd-$1.vue"
+      "^t-(.*)": "@tdesign/uniapp/$1/$1.vue"
     }
   },
   "globalStyle": {

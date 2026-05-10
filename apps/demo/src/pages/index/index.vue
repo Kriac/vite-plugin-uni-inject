@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import { useToast } from "wot-design-uni";
+import { showToast } from "@tdesign/uniapp";
 import { navigateTo } from "@/libs/utils";
 
-const toast = useToast("page-toast");
-
 // 显示提示
-const showToast = () => {
-  toast.show({
-    msg: "这是一个提示信息",
+const showTips = () => {
+  showToast({
+    message: "Hello Page",
   });
 };
 
@@ -20,10 +18,10 @@ console.log("Hello Page");
 </script>
 
 <template>
-  <wd-navbar safe-area-inset-top title="示例项目" />
+  <t-navbar title="示例项目" placeholder />
   <div class="content">
-    <wd-button @click="showToast">点击显示</wd-button>
-    <wd-button @click="goToMore">跳转更多</wd-button>
+    <t-button @click="showTips">点击显示</t-button>
+    <t-button @click="goToMore">跳转更多</t-button>
   </div>
 </template>
 
