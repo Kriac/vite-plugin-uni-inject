@@ -21,7 +21,8 @@
     "husky": "catalog:",
     "lint-staged": "catalog:",
     "prettier": "catalog:",
-    "stylelint": "catalog:"
+    "stylelint": "catalog:",
+    "typescript": "catalog:"
   },
   "config": {
     "commitizen": {
