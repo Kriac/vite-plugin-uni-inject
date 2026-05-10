@@ -18,15 +18,15 @@ const goToInjectTutorial = () => {
 </script>
 
 <template>
-  <wd-navbar
+  <t-navbar
     safe-area-inset-top
     left-arrow
     title="更多示例"
     @click-left="back"
   />
   <div class="content">
-    <wd-button @click="goToTutorial">跳转教程</wd-button>
-    <wd-button @click="goToInjectTutorial">跳转注入教程</wd-button>
+    <t-button @click="goToTutorial">跳转教程</t-button>
+    <t-button @click="goToInjectTutorial">跳转注入教程</t-button>
   </div>
 </template>
 
