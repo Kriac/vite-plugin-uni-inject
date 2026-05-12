@@ -1,4 +1,4 @@
-import uniInject from "./inject";
-import uniAutoPages from "./auto-pages";
+import uniInject from "./modules/inject";
+import uniAutoPages from "./modules/auto-pages";
 
 export { uniInject, uniAutoPages };
