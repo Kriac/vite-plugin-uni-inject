@@ -1,4 +1,8 @@
-import type { AutoPagesPluginOptions, UniPagesJson, UniPage } from "../types";
+import type {
+  AutoPagesPluginOptions,
+  UniPagesJson,
+  UniPage,
+} from "../../types";
 import fs from "fs";
 import path from "path";
 
