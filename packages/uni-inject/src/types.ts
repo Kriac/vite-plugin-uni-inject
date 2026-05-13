@@ -1,13 +1,13 @@
 /** 页面路由配置 */
 export interface UniPage {
-  path: string;
   [key: string]: unknown;
+  path: string;
 }
 
 /** 分包JSON配置 */
 export interface UniSubPackage {
-  root: string;
   pages: UniPage[];
+  root: string;
 }
 
 /** 页面JSON配置 */
@@ -28,16 +28,16 @@ export interface InjectPluginOptions {
 /** 自动补全 pages 插件配置 */
 export interface AutoPagesPluginOptions {
   /**
-   * 输出类型
-   * @default './uni-pages.d.ts'
-   */
-  dts?: string;
-
-  /**
    * 扫描目录
    * @default 'pages'
    */
   dir?: string;
+
+  /**
+   * 输出类型
+   * @default './uni-pages.d.ts'
+   */
+  dts?: string;
 
   /**
    * 分包目录
