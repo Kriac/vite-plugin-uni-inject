@@ -1,9 +1,8 @@
-import type { InjectPluginOptions, UniPagesJson, UniPage } from "../../types";
+import type { InjectPluginOptions, UniPage, UniPagesJson } from "../../types";
 import { parse } from "@babel/parser";
 import { parse as parseSFC } from "@vue/compiler-sfc";
 import fs from "fs";
 import path from "path";
-import MagicString from "magic-string";
 
 /**
  * 注入代码插件
@@ -105,25 +104,46 @@ export default function uniInject(opts?: InjectPluginOptions) {
         const start = newDescriptor.scriptSetup.loc.start.offset;
         const end = newDescriptor.scriptSetup.loc.end.offset;
         const scriptCode = newDescriptor.scriptSetup.content;
-
-        const s = new MagicString(scriptCode);
         const ast = parse(scriptCode, {
           sourceType: "module",
           plugins: ["typescript"],
         });
 
-        const imports: string[] = [];
+        // 收集 import 语句
+        const imports: { code: string; end: number; start: number }[] = [];
         for (const node of ast.program.body) {
-          if (node.type === "ImportDeclaration") {
-            imports.push(scriptCode.slice(node.start!, node.end!));
-            s.remove(node.start!, node.end! + 1);
+          if (
+            node.type === "ImportDeclaration" &&
+            typeof node.start === "number" &&
+            typeof node.end === "number"
+          ) {
+            imports.push({
+              code: scriptCode.slice(node.start, node.end),
+              start: node.start,
+              end: node.end,
+            });
           }
         }
+
+        // 将注入的 import 放到最前面
+        let nextScriptCode = scriptCode;
         if (imports.length) {
-          s.prepend("\n" + imports.join("\n"));
+          const ranges = [...imports].sort((a, b) => b.start - a.start);
+          for (const { start: rangeStart, end: rangeEnd } of ranges) {
+            let removeEnd = rangeEnd;
+            if (nextScriptCode.startsWith("\r\n", removeEnd)) {
+              removeEnd += 2;
+            } else if (nextScriptCode[removeEnd] === "\n") {
+              removeEnd += 1;
+            }
+            nextScriptCode =
+              nextScriptCode.slice(0, rangeStart) +
+              nextScriptCode.slice(removeEnd);
+          }
+          nextScriptCode = `\n${imports.map((item) => item.code).join("\n")}${nextScriptCode}`;
         }
 
-        newCode = newCode.slice(0, start) + s.toString() + newCode.slice(end);
+        newCode = newCode.slice(0, start) + nextScriptCode + newCode.slice(end);
       }
 
       return {

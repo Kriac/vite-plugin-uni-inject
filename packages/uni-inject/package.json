@@ -20,8 +20,7 @@
   },
   "dependencies": {
     "@vue/compiler-sfc": "3.5.27",
-    "@babel/parser": "7.29.0",
-    "magic-string": "0.30.21"
+    "@babel/parser": "7.29.0"
   },
   "devDependencies": {
     "@types/node": "25.0.10",
