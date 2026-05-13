@@ -1,7 +1,7 @@
 import type {
   AutoPagesPluginOptions,
-  UniPagesJson,
   UniPage,
+  UniPagesJson,
 } from "../../types";
 import fs from "fs";
 import path from "path";
@@ -221,14 +221,12 @@ export default function uniAutoPages(opts?: AutoPagesPluginOptions) {
 
       // 写入基于文件路由的 pages.json 配置
       if (changed) {
+        if (dts) {
+          const dtsFilePath = resolveDtsFilePath(srcRoot, dts);
+          const dtsContent = buildRouteDts(routes);
+          fs.writeFileSync(dtsFilePath, dtsContent);
+        }
         fs.writeFileSync(pagesJsonPath, JSON.stringify(merged, null, 2) + "\n");
-      }
-
-      // 生成类型声明文件，提供页面路由的类型支持
-      if (dts) {
-        const dtsFilePath = resolveDtsFilePath(srcRoot, dts);
-        const dtsContent = buildRouteDts(routes);
-        fs.writeFileSync(dtsFilePath, dtsContent);
       }
     },
   };
