@@ -6,4 +6,14 @@ onLaunch(() => {
 });
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-top: 100px;
+}
+</style>

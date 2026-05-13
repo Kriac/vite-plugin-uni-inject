@@ -1,16 +1,11 @@
 <script setup lang="ts">
-import { showToast } from "@tdesign/uniapp";
 import { navigateTo } from "@/libs/utils";
+import { useMessage } from "@/hooks/useMessage";
 
-// 显示提示
-const showTips = () => {
-  showToast({
-    message: "Hello Page",
-  });
-};
+const { showTips } = useMessage();
 
-// 跳转更多
-const goToMore = () => {
+// 跳转测试注入页面
+const goToTestPages = () => {
   navigateTo("/pages/more/test");
 };
 
@@ -21,18 +16,8 @@ console.log("Hello Page");
   <t-navbar title="示例项目" placeholder />
   <div class="content">
     <t-button @click="showTips">点击显示</t-button>
-    <t-button @click="goToMore">跳转更多</t-button>
+    <t-button @click="goToTestPages">跳转测试注入页面</t-button>
   </div>
 </template>
 
-<style scoped lang="scss">
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 200px;
-}
-</style>
+<style scoped lang="scss"></style>
