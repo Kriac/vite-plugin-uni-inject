@@ -1,43 +1,23 @@
 <script setup lang="ts">
+import { useMessage } from "@/hooks/useMessage";
 import { navigateToTutorial } from "@/libs/utils";
 
-// 返回上一页
-const back = () => {
-  uni.navigateBack();
-};
+const { showTips } = useMessage();
 
-// 跳转教程
-const goToTutorial = () => {
+// 跳转分包注入示例
+const goToSubInject = () => {
   navigateToTutorial("/pages/index/index");
 };
 
-// 跳转注入教程
-const goToInjectTutorial = () => {
-  navigateToTutorial("/pages/more/inject");
-};
+console.log("Hello Test Page");
 </script>
 
 <template>
-  <t-navbar
-    safe-area-inset-top
-    left-arrow
-    title="更多示例"
-    @click-left="back"
-  />
+  <t-navbar title="测试注入示例" left-arrow placeholder />
   <div class="content">
-    <t-button @click="goToTutorial">跳转教程</t-button>
-    <t-button @click="goToInjectTutorial">跳转注入教程</t-button>
+    <t-button @click="showTips">点击显示</t-button>
+    <t-button @click="goToSubInject">跳转分包注入示例</t-button>
   </div>
 </template>
 
-<style scoped lang="scss">
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 200px;
-}
-</style>
+<style scoped lang="scss"></style>

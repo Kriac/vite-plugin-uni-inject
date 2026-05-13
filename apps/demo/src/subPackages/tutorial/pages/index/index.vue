@@ -1,17 +1,16 @@
 <script setup lang="ts">
-// 返回上一页
-const back = () => {
-  uni.navigateBack();
-};
+import { useMessage } from "@/hooks/useMessage";
+
+const { showTips } = useMessage();
+
+console.log("Hello SubPackage Page");
 </script>
 
 <template>
-  <t-navbar
-    safe-area-inset-top
-    left-arrow
-    title="教程示例"
-    @click-left="back"
-  />
+  <t-navbar title="分包注入示例" left-arrow placeholder />
+  <div class="content">
+    <t-button @click="showTips">点击显示</t-button>
+  </div>
 </template>
 
 <style scoped lang="scss"></style>
