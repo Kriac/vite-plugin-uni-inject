@@ -1,4 +1,4 @@
-import type { RoutePath, ExtractPath } from "@/types/uni-pages";
+import type { ExtractPath, RoutePath } from "@/types/uni-pages";
 
 /**
  * 测试注入代码
