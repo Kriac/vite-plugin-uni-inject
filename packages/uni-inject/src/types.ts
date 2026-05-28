@@ -1,6 +1,45 @@
-/** 页面路由配置 */
-export interface UniPage {
+/** 注入插件配置 */
+export interface InjectPluginOptions {
+  /**
+   * 注入的文件路径
+   * @default './App.inject.vue'
+   */
+  path?: string;
+}
+
+/** 页面 style 配置 */
+export interface UniPageStyle {
   [key: string]: unknown;
+  /** 窗口背景色 */
+  backgroundColor?: string;
+  /** 下拉加载样式 */
+  backgroundTextStyle?: "dark" | "light";
+  /** 是否禁止页面滚动 */
+  disableScroll?: boolean;
+  /** 是否开启下拉刷新 */
+  enablePullDownRefresh?: boolean;
+  /** 导航栏背景颜色 */
+  navigationBarBackgroundColor?: string;
+  /** 导航栏标题颜色 */
+  navigationBarTextStyle?: "black" | "white";
+  /** 导航栏标题文字 */
+  navigationBarTitleText?: string;
+  /** 触底距离 */
+  onReachBottomDistance?: number;
+  /** 自定义组件配置 */
+  usingComponents?: Record<string, string>;
+}
+
+/** definePage 宏接收的页面配置 */
+export interface DefinePageConfig {
+  /** 标记为首页，仅主包页面生效。 */
+  home?: boolean;
+  /** 页面样式 */
+  style?: UniPageStyle;
+}
+
+/** 页面配置 */
+export interface UniPage extends DefinePageConfig {
   path: string;
 }
 
@@ -14,15 +53,6 @@ export interface UniSubPackage {
 export interface UniPagesJson {
   pages: UniPage[];
   subPackages?: UniSubPackage[];
-}
-
-/** 注入插件配置 */
-export interface InjectPluginOptions {
-  /**
-   * 注入的文件路径
-   * @default './App.inject.vue'
-   */
-  path?: string;
 }
 
 /** 自动补全 pages 插件配置 */
