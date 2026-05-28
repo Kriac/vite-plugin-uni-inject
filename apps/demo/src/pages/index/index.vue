@@ -10,6 +10,7 @@ const goToTestPages = () => {
 };
 
 definePage({
+  home: true,
   style: {
     disableScroll: true,
   },
