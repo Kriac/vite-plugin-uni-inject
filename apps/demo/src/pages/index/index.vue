@@ -9,7 +9,11 @@ const goToTestPages = () => {
   navigateTo("/pages/more/test");
 };
 
-console.log("Hello Page");
+definePage({
+  style: {
+    disableScroll: true,
+  },
+});
 </script>
 
 <template>
