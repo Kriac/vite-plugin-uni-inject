@@ -9,9 +9,6 @@ import { parse as parseSFC } from "@vue/compiler-sfc";
 import fs from "fs";
 import path from "path";
 
-// 缓存目录
-const CACHE_DIR = "node_modules/.cache/vite-plugin-uni-inject";
-
 // 读取 pages.json 文件
 function readPagesJson(pagesJsonPath: string) {
   if (!fs.existsSync(pagesJsonPath)) {
@@ -265,23 +262,21 @@ declare global {
 `;
 }
 
-// 基于缓存机制的文件写入文件
-function writeWithCache(
-  cachePath: string,
-  targetPath: string,
-  nextContent: string,
-) {
-  const cached = fs.existsSync(cachePath)
-    ? fs.readFileSync(cachePath, "utf-8")
-    : null;
-
-  // 内容未变且目标文件存在，则跳过回写
-  if (cached === nextContent && fs.existsSync(targetPath)) {
+// 仅在内容发生变化时写入文件（忽略 prettier 等格式化产生的等价差异）
+function writeIfTextChanged(targetPath: string, nextContent: string) {
+  const normalize = (s: string) => {
+    return s
+      .replace(/\s+/g, "") // 移除所有空白
+      .replace(/,(?=[)\]}>])/g, "") // 移除 `,)` `,]` `,}` `,>` 中的尾随逗号
+      .replace(/([=(<,|&?:])\|/g, "$1"); // 移除联合类型的前导 `|`
+  };
+  if (
+    fs.existsSync(targetPath) &&
+    normalize(fs.readFileSync(targetPath, "utf-8")) === normalize(nextContent)
+  ) {
     return;
   }
-
-  fs.mkdirSync(path.dirname(cachePath), { recursive: true });
-  fs.writeFileSync(cachePath, nextContent);
+  fs.mkdirSync(path.dirname(targetPath), { recursive: true });
   fs.writeFileSync(targetPath, nextContent);
 }
 
@@ -302,7 +297,6 @@ export default function uniAutoPages(opts?: AutoPagesPluginOptions) {
     // 插件初始化
     configResolved(config: { root: string }) {
       const srcRoot = path.resolve(config.root, "src");
-      const cacheRoot = path.resolve(config.root, CACHE_DIR);
 
       // 读取当前 pages.json 文件
       const pagesJsonPath = path.join(srcRoot, "pages.json");
@@ -316,7 +310,6 @@ export default function uniAutoPages(opts?: AutoPagesPluginOptions) {
         srcRoot,
         getScanDirs(mainPackage, subPackages),
       );
-
       const merged = getPagesByFileRoute(
         routes,
         analysisMap,
@@ -326,20 +319,12 @@ export default function uniAutoPages(opts?: AutoPagesPluginOptions) {
 
       // 写入 pages.json 文件
       const newPagesJson = JSON.stringify(merged, null, 2) + "\n";
-      writeWithCache(
-        path.join(cacheRoot, "pages.json"),
-        pagesJsonPath,
-        newPagesJson,
-      );
+      writeIfTextChanged(pagesJsonPath, newPagesJson);
 
       // 写入路由类型声明文件
       if (dts) {
         const newDts = buildRouteDts(routes);
-        writeWithCache(
-          path.join(cacheRoot, path.basename(dts)),
-          path.join(srcRoot, dts),
-          newDts,
-        );
+        writeIfTextChanged(path.join(srcRoot, dts), newDts);
       }
     },
 
