@@ -58,19 +58,19 @@ export interface UniPagesJson {
 /** 自动补全 pages 插件配置 */
 export interface AutoPagesPluginOptions {
   /**
-   * 扫描目录
-   * @default 'pages'
-   */
-  dir?: string;
-
-  /**
    * 输出类型
    * @default './uni-pages.d.ts'
    */
   dts?: string;
 
   /**
-   * 分包目录
+   * 主包目录
+   * @default 'pages'
+   */
+  mainPackage?: string;
+
+  /**
+   * 分包列表
    * @default []
    */
   subPackages?: string[];
