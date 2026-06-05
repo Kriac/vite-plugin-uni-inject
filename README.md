@@ -1,27 +1,10 @@
-# vite-plugin-uni-inject
+# Vite-Plugin-Uni-Inject
 
-利用 Vite 插件机制，实现自动注入代码，解放你的双手。
+一个轻量级的 uniapp 页面注入插件，旨在为 uniapp 项目提供自动注入代码的功能。
 
-### 安装
+## 文档
 
-```bash
-pnpm i -D vite-plugin-uni-inject
-```
-
-### vite.config.ts
-
-```ts
-import { defineConfig } from "vite";
-import { uniAutoPages, uniInject } from "vite-plugin-uni-inject";
-import uni from "@dcloudio/vite-plugin-uni";
-
-// 如果有重写 page.json 文件的插件，请确保写在 uniInject 之前
-export default defineConfig(() => {
-  return {
-    plugins: [uniAutoPages(), uniInject(), uni()],
-  };
-});
-```
+请阅读 [文档](https://kriac.github.io/vite-plugin-uni-inject) 了解更多使用细节。
 
 ## 使用
 
