@@ -7,16 +7,16 @@
     "build": "uni build -p mp-weixin"
   },
   "dependencies": {
-    "@dcloudio/uni-app": "catalog:",
-    "@dcloudio/uni-mp-weixin": "catalog:",
-    "@tdesign/uniapp": "catalog:",
-    "vue": "catalog:"
+    "@dcloudio/uni-app": "3.0.0-4080720251210001",
+    "@dcloudio/uni-mp-weixin": "3.0.0-4080720251210001",
+    "@tdesign/uniapp": "0.9.0",
+    "vue": "3.4.21"
   },
   "devDependencies": {
-    "@dcloudio/vite-plugin-uni": "catalog:",
-    "sass": "catalog:",
-    "vite": "catalog:",
+    "@dcloudio/vite-plugin-uni": "3.0.0-4080720251210001",
+    "sass": "1.78.0",
+    "vite": "5.2.8",
     "vite-plugin-uni-inject": "workspace:*",
-    "vue-tsc": "catalog:"
+    "vue-tsc": "3.2.1"
   }
 }

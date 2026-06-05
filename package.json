@@ -10,19 +10,21 @@
     "lint:es": "eslint --fix",
     "lint:style": "stylelint **/*.{vue,css,scss} --fix",
     "dev:demo": "pnpm -F demo dev",
+    "dev:docs": "pnpm -F docs dev",
+    "build:docs": "pnpm -F docs build",
     "build:inject": "pnpm -F vite-plugin-uni-inject build",
     "release:inject": "pnpm build:inject && pnpm -F vite-plugin-uni-inject release"
   },
   "devDependencies": {
-    "@kriac/lint-kit": "catalog:",
-    "commitlint": "catalog:",
-    "czg": "catalog:",
-    "eslint": "catalog:",
-    "husky": "catalog:",
-    "lint-staged": "catalog:",
-    "prettier": "catalog:",
-    "stylelint": "catalog:",
-    "typescript": "catalog:"
+    "@kriac/lint-kit": "0.3.0",
+    "commitlint": "20.3.0",
+    "czg": "1.13.0",
+    "eslint": "9.39.4",
+    "husky": "9.1.7",
+    "lint-staged": "16.4.0",
+    "prettier": "3.7.2",
+    "stylelint": "17.8.0",
+    "typescript": "5.8.2"
   },
   "config": {
     "commitizen": {
