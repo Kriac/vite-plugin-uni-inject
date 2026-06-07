@@ -1,4 +1,4 @@
-# Vite-Plugin-Uni-Inject
+# Vite-plugin-uni-inject
 
 一个轻量级的 uniapp 页面注入插件，旨在为 uniapp 项目提供自动注入代码的功能。
 

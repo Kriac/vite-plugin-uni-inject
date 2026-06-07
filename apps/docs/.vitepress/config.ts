@@ -6,7 +6,7 @@ const base = isGithubActions && repo ? `/${repo}/` : "/";
 
 export default defineConfig({
   base,
-  title: "Vite-Plugin-Uni-Inject",
+  title: "Vite-plugin-uni-inject",
   description:
     "一个轻量级的 uniapp 页面注入插件，旨在为 uniapp 项目提供自动注入代码的功能。",
   lang: "zh-CN",
@@ -20,7 +20,29 @@ export default defineConfig({
         link: "/guide/getting-started",
       },
     ],
-    sidebar: [],
+    sidebar: [
+      {
+        text: "指南",
+        items: [
+          {
+            text: "快速开始",
+            link: "/guide/getting-started",
+          },
+          {
+            text: "页面注入",
+            link: "/guide/inject",
+          },
+          {
+            text: "自动 pages",
+            link: "/guide/auto-pages",
+          },
+          {
+            text: "配置项",
+            link: "/guide/options",
+          },
+        ],
+      },
+    ],
     socialLinks: [
       {
         icon: "github",
