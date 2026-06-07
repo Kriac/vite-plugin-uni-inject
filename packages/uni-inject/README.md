@@ -1,41 +1,19 @@
-# vite-plugin-uni-inject
+# Vite-plugin-uni-inject
 
-利用 Vite 插件机制，实现自动注入代码，解放你的双手。
+一个轻量级的 uniapp 页面注入插件，旨在为 uniapp 项目提供自动注入代码的功能。
 
-## 功能特点
+## 文档
 
-- 干净的注入任何代码，没有多余的结构。
-- 支持注入 `<page-meta/>` 这种只能放在页面第一个位置的标签节点。
-- 支持基于文件路由的 `page.json` 自动生成并注入，无需手动维护页面表。
+请阅读 [文档](https://kriac.github.io/vite-plugin-uni-inject) 了解更多使用细节。
 
-## 如何使用
+## 使用
 
-### 安装依赖
+如果你在开发过程中遇到了什么问题，或者有更好的建议，欢迎提交 issue 与我们讨论。
 
-```bash
-pnpm i -D vite-plugin-uni-inject
-```
+## 贡献
 
-### vite.config.ts
+首先感谢你考虑为本项目做出贡献！我们欢迎社区成员的贡献，以帮助改进和扩展本项目。
 
-```ts
-import { defineConfig } from "vite";
-import { uniAutoPages, uniInject } from "vite-plugin-uni-inject";
-import uni from "@dcloudio/vite-plugin-uni";
+## 执照
 
-// 如果有重写 page.json 文件的插件，请确保写在 uniInject 之前
-export default defineConfig(() => {
-  return {
-    plugins: [uniAutoPages(), uniInject(), uni()],
-  };
-});
-```
-
-### 独立插件说明
-
-- `uniAutoPages(options)`：负责扫描文件路由并补全 `src/pages.json` 。
-- `uniInject(options)`：负责注入 `App.inject.vue`（或自定义文件）到页面文件。
-
-## 报告错误
-
-欢迎提交 issue 与我们讨论。
+本项目采用 MIT 许可证，详细内容请见 [LICENSE](LICENSE) 文件。
