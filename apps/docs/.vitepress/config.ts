@@ -8,7 +8,7 @@ export default defineConfig({
   base,
   title: "Vite-plugin-uni-inject",
   description:
-    "一个轻量级的 uniapp 页面注入插件，旨在为 uniapp 项目提供自动注入代码的功能。",
+    "一个轻量级的 uniapp 注入增强插件，旨在为 uniapp 项目提供更舒适的开发体验。",
   lang: "zh-CN",
   themeConfig: {
     search: {
@@ -22,23 +22,47 @@ export default defineConfig({
     ],
     sidebar: [
       {
-        text: "指南",
+        text: "介绍",
         items: [
           {
             text: "快速开始",
             link: "/guide/getting-started",
           },
+        ],
+      },
+      {
+        text: "核心能力",
+        collapsed: false,
+        items: [
           {
-            text: "页面注入",
+            text: "全局注入",
             link: "/guide/inject",
           },
           {
-            text: "自动 pages",
-            link: "/guide/auto-pages",
+            text: "文件路由",
+            link: "/guide/file-routing",
           },
           {
-            text: "配置项",
-            link: "/guide/options",
+            text: "definePage",
+            link: "/guide/define-page",
+          },
+          {
+            text: "路由类型",
+            link: "/guide/route-types",
+          },
+        ],
+      },
+      {
+        text: "配置参考",
+        collapsed: false,
+        items: [
+          {
+            text: "uniInject",
+            link: "/guide/options#uniinject",
+          },
+          {
+            text: "uniAutoPages",
+            link: "/guide/options#uniautopages",
           },
         ],
       },
