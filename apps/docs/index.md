@@ -39,15 +39,3 @@ features:
     link: /guide/getting-started
     linkText: 快速开始
 ---
-
-<style>
-:root {
-  --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: linear-gradient(120deg, #bd34fe 30%, #41d1ff);
-}
-
-.VPHero {
-  padding: 18px;
-  filter: drop-shadow(-2px 4px 6px rgb(0 0 0 / 20%));
-}
-</style>
