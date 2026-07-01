@@ -16,7 +16,7 @@
     "release:inject": "pnpm build:inject && pnpm -F vite-plugin-uni-inject release"
   },
   "devDependencies": {
-    "@kriac/lint-kit": "0.3.0",
+    "@kriac/lint-kit": "0.4.0",
     "commitlint": "20.3.0",
     "czg": "1.13.0",
     "eslint": "9.39.4",
