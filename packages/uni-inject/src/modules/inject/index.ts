@@ -128,7 +128,9 @@ export default function uniInject(opts?: InjectPluginOptions) {
         // 将注入的 import 放到最前面
         let nextScriptCode = scriptCode;
         if (imports.length) {
-          const ranges = [...imports].sort((a, b) => b.start - a.start);
+          const ranges = [...imports].sort((a, b) => {
+            return b.start - a.start;
+          });
           for (const { start: rangeStart, end: rangeEnd } of ranges) {
             let removeEnd = rangeEnd;
             if (nextScriptCode.startsWith("\r\n", removeEnd)) {
@@ -140,7 +142,11 @@ export default function uniInject(opts?: InjectPluginOptions) {
               nextScriptCode.slice(0, rangeStart) +
               nextScriptCode.slice(removeEnd);
           }
-          nextScriptCode = `\n${imports.map((item) => item.code).join("\n")}${nextScriptCode}`;
+          nextScriptCode = `\n${imports
+            .map((item) => {
+              return item.code;
+            })
+            .join("\n")}${nextScriptCode}`;
         }
 
         newCode = newCode.slice(0, start) + nextScriptCode + newCode.slice(end);
