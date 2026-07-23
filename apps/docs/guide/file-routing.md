@@ -13,10 +13,11 @@ src/
 │  └─ more/test.vue
 └─ subPackages/
    └─ tutorial/
-      └─ pages/index/index.vue
+    └─ views/
+      └─ index/index.vue
 ```
 
-配置 `mainPackage` 与 `subPackages`：
+通过 `pageDirs` 指定要扫描的页面目录，通过 `subPackages` 可以声明分包根目录：
 
 ```ts
 import { uniAutoPages } from "vite-plugin-uni-inject";
@@ -24,9 +25,9 @@ import { uniAutoPages } from "vite-plugin-uni-inject";
 export default defineConfig({
   plugins: [
     uniAutoPages({
-      mainPackage: "pages",
-      subPackages: ["subPackages/tutorial"],
       dts: "./types/uni-pages.d.ts",
+      pageDirs: ["pages", "views"],
+      subPackages: ["subPackages/tutorial"],
     }),
   ],
 });
@@ -49,13 +50,15 @@ export default defineConfig({
       "root": "subPackages/tutorial",
       "pages": [
         {
-          "path": "pages/index/index"
+          "path": "views/index/index"
         }
       ]
     }
   ]
 }
 ```
+
+每个页面目录都会被递归扫描，因此目录名称和内部层级不受限制。
 
 `pages.json` 中已有的其他顶层配置会被保留，例如 `globalStyle`、`easycom` 等。
 
@@ -69,7 +72,7 @@ export default defineConfig({
 
 ### 强制重新生成
 
-如果发现由于缓存导致页面配置未按预期更新，可以通过以下两种方式清除缓存：
+如果发现由于缓存导致页面配置未按预期更新，可以通过以下方式清除缓存重新生成：
 
 - 移除插件生成的 `.d.ts` 文件（推荐）
 - 移除 `node_modules/.vite/vite-plugin-uni-inject` 的缓存目录
