@@ -1,4 +1,4 @@
-import type { InjectPluginOptions, UniPage, UniPagesJson } from "../../types";
+import type { InjectPluginOptions, UniPage, UniPagesJson } from "./types";
 import { parse } from "@babel/parser";
 import { parse as parseSFC } from "@vue/compiler-sfc";
 import fs from "fs";

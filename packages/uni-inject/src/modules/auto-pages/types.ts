@@ -1,12 +1,3 @@
-/** 注入插件配置 */
-export interface InjectPluginOptions {
-  /**
-   * 注入的文件路径
-   * @default './App.inject.vue'
-   */
-  path?: string;
-}
-
 /** 页面 style 配置 */
 export interface UniPageStyle {
   [key: string]: unknown;
@@ -43,13 +34,13 @@ export interface UniPage extends DefinePageConfig {
   path: string;
 }
 
-/** 分包JSON配置 */
+/** 分包 JSON 配置 */
 export interface UniSubPackage {
   pages: UniPage[];
   root: string;
 }
 
-/** 页面JSON配置 */
+/** 页面 JSON 配置 */
 export interface UniPagesJson {
   pages: UniPage[];
   subPackages?: UniSubPackage[];

@@ -3,7 +3,7 @@ import type {
   DefinePageConfig,
   UniPage,
   UniPagesJson,
-} from "../../types";
+} from "./types";
 import { parse as parseBabel } from "@babel/parser";
 import { parse as parseSFC } from "@vue/compiler-sfc";
 import fs from "fs";
