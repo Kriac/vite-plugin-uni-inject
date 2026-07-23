@@ -10,10 +10,8 @@ import path from "path";
 export default function uniInject(opts?: InjectPluginOptions) {
   const { path: injectPath = "App.inject.vue" } = opts || {};
 
-  // 页面集合
   const pageSet = new Set<string>();
 
-  // 注入内容
   let injectTemplate = "";
   let injectScriptSetup = "";
 
@@ -21,23 +19,19 @@ export default function uniInject(opts?: InjectPluginOptions) {
     name: "vite-plugin-uni-inject",
     enforce: "pre" as const,
 
-    // 插件初始化
     configResolved(config: { root: string }) {
       const srcRoot = path.resolve(config.root, "src");
 
-      // 读取 inject 文件
       const injPath = path.join(srcRoot, injectPath);
       if (!fs.existsSync(injPath)) {
         return;
       }
 
-      // 读取 pages.json 文件
       const pagesJsonPath = path.join(srcRoot, "pages.json");
       if (!fs.existsSync(pagesJsonPath)) {
         return;
       }
 
-      // 保存注入内容
       const content = fs.readFileSync(injPath, "utf-8");
       const { descriptor } = parseSFC(content);
       if (descriptor.template) {
@@ -47,7 +41,6 @@ export default function uniInject(opts?: InjectPluginOptions) {
         injectScriptSetup = descriptor.scriptSetup.content.trim();
       }
 
-      // 收集页面文件
       const pagesJsonContent = fs.readFileSync(pagesJsonPath, "utf-8");
       const pagesJson: UniPagesJson = JSON.parse(pagesJsonContent);
       const subPackages = pagesJson.subPackages ?? [];
@@ -63,7 +56,6 @@ export default function uniInject(opts?: InjectPluginOptions) {
       });
     },
 
-    // 处理页面文件
     transform(code: string, id: string) {
       if (!id.endsWith(".vue")) {
         return;
@@ -78,7 +70,6 @@ export default function uniInject(opts?: InjectPluginOptions) {
 
       const { descriptor } = parseSFC(code);
 
-      // 注入 template
       if (injectTemplate && descriptor.template) {
         const tplContent = descriptor.template.content.trim();
         const injectedTemplate = `${injectTemplate}\n${tplContent}`.trim();
@@ -88,7 +79,6 @@ export default function uniInject(opts?: InjectPluginOptions) {
           newCode.slice(descriptor.template.loc.end.offset);
       }
 
-      // 注入 script setup
       if (injectScriptSetup && descriptor.scriptSetup) {
         const start = descriptor.scriptSetup.loc.start.offset;
         newCode =
@@ -99,7 +89,6 @@ export default function uniInject(opts?: InjectPluginOptions) {
 
       const { descriptor: newDescriptor } = parseSFC(newCode);
 
-      // 处理 script setup
       if (newDescriptor.scriptSetup) {
         const start = newDescriptor.scriptSetup.loc.start.offset;
         const end = newDescriptor.scriptSetup.loc.end.offset;
@@ -109,7 +98,6 @@ export default function uniInject(opts?: InjectPluginOptions) {
           plugins: ["typescript"],
         });
 
-        // 收集 import 语句
         const imports: { code: string; end: number; start: number }[] = [];
         for (const node of ast.program.body) {
           if (
@@ -125,7 +113,6 @@ export default function uniInject(opts?: InjectPluginOptions) {
           }
         }
 
-        // 将注入的 import 放到最前面
         let nextScriptCode = scriptCode;
         if (imports.length) {
           const ranges = [...imports].sort((a, b) => {
