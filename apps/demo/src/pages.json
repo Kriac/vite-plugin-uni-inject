@@ -26,7 +26,7 @@
       "root": "subPackages/tutorial",
       "pages": [
         {
-          "path": "pages/index/index"
+          "path": "views/index/index"
         }
       ]
     }

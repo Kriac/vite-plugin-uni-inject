@@ -7,7 +7,7 @@ export default defineConfig(() => {
     plugins: [
       uniAutoPages({
         dts: "./types/uni-pages.d.ts",
-        mainPackage: "pages",
+        pageDirs: ["pages", "views"],
         subPackages: ["subPackages/tutorial"],
       }),
       uniInject({
