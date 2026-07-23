@@ -11,7 +11,7 @@ src/
 ├─ pages/
 │  ├─ index/index.vue
 │  └─ more/test.vue
-└─ subPackages/
+└─ sub-packages/
    └─ tutorial/
     └─ views/
       └─ index/index.vue
@@ -27,7 +27,7 @@ export default defineConfig({
     uniAutoPages({
       dts: "./types/uni-pages.d.ts",
       pageDirs: ["pages", "views"],
-      subPackages: ["subPackages/tutorial"],
+      subPackages: ["sub-packages/tutorial"],
     }),
   ],
 });
@@ -47,7 +47,7 @@ export default defineConfig({
   ],
   "subPackages": [
     {
-      "root": "subPackages/tutorial",
+      "root": "sub-packages/tutorial",
       "pages": [
         {
           "path": "views/index/index"

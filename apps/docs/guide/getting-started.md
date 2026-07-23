@@ -29,14 +29,14 @@ yarn add -D vite-plugin-uni-inject
 
 ```ts
 import { defineConfig } from "vite";
-import uni from "@dcloudio/vite-plugin-uni";
 import { uniAutoPages, uniInject } from "vite-plugin-uni-inject";
+import uni from "@dcloudio/vite-plugin-uni";
 
 export default defineConfig({
   plugins: [
     uniAutoPages({
       dts: "./types/uni-pages.d.ts",
-      subPackages: ["subPackages/tutorial"],
+      subPackages: ["sub-packages/tutorial"],
     }),
     uniInject({
       path: "./components/inject.vue",

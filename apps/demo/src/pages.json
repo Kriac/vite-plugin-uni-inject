@@ -23,7 +23,7 @@
   ],
   "subPackages": [
     {
-      "root": "subPackages/tutorial",
+      "root": "sub-packages/tutorial",
       "pages": [
         {
           "path": "views/index/index"

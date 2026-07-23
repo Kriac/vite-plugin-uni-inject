@@ -8,7 +8,7 @@ export default defineConfig(() => {
       uniAutoPages({
         dts: "./types/uni-pages.d.ts",
         pageDirs: ["pages", "views"],
-        subPackages: ["subPackages/tutorial"],
+        subPackages: ["sub-packages/tutorial"],
       }),
       uniInject({
         path: "./components/inject.vue",

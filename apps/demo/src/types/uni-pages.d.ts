@@ -16,7 +16,7 @@ export type ExtractPath<
 export type RoutePath =
   | "/pages/index/index"
   | "/pages/more/test"
-  | "/subPackages/tutorial/views/index/index";
+  | "/sub-packages/tutorial/views/index/index";
 
 declare global {
   /**

@@ -28,7 +28,7 @@ uniInject({
 uniAutoPages({
   dts: "./types/uni-pages.d.ts",
   pageDirs: ["pages"],
-  subPackages: ["subPackages/tutorial"],
+  subPackages: ["sub-packages/tutorial"],
 });
 ```
 
