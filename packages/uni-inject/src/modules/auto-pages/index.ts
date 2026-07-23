@@ -157,18 +157,20 @@ function collectFileRoutes(srcRoot: string, routeDirs: string[]) {
 }
 
 // 获取需要扫描的目录列表
-function getScanDirs(mainPackage: string, subPackages: string[]) {
+function getScanDirs(pageDirs: string[], subPackages: string[]) {
   const dirSet = new Set<string>();
-  const mainDir = normalizeDir(mainPackage);
-  if (mainDir) {
-    dirSet.add(mainDir);
-  }
-  for (const subRoot of subPackages) {
-    const sub = normalizeDir(subRoot);
-    if (!sub) {
+  for (const pageDir of pageDirs) {
+    const normalizedDir = normalizeDir(pageDir);
+    if (!normalizedDir) {
       continue;
     }
-    dirSet.add(mainDir ? `${sub}/${mainDir}` : sub);
+    dirSet.add(normalizedDir);
+    for (const subPackage of subPackages) {
+      const normalizedSubPackage = normalizeDir(subPackage);
+      if (normalizedSubPackage) {
+        dirSet.add(`${normalizedSubPackage}/${normalizedDir}`);
+      }
+    }
   }
   return Array.from(dirSet);
 }
@@ -306,7 +308,7 @@ function writeFileWithCache(
  */
 export default function uniAutoPages(opts?: AutoPagesPluginOptions) {
   const {
-    mainPackage = "pages",
+    pageDirs = ["pages"],
     subPackages = [],
     dts = "uni-pages.d.ts",
   } = opts || {};
@@ -329,7 +331,7 @@ export default function uniAutoPages(opts?: AutoPagesPluginOptions) {
       // 收集文件路由与分析结果
       const { routes, analysisMap } = collectFileRoutes(
         srcRoot,
-        getScanDirs(mainPackage, subPackages),
+        getScanDirs(pageDirs, subPackages),
       );
       const merged = getPagesByFileRoute(
         routes,
