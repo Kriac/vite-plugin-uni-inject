@@ -16,13 +16,13 @@ export const navigateTo = (url: RoutePath) => {
   });
 };
 
-type TutorialRath = ExtractPath<RoutePath, "/subPackages/tutorial">;
+type TutorialRath = ExtractPath<RoutePath, "/sub-packages/tutorial">;
 
 /**
  * 前往教程分包页面
  */
 export const navigateToTutorial = (url: TutorialRath) => {
   uni.navigateTo({
-    url: `/subPackages/tutorial${url}`,
+    url: `/sub-packages/tutorial${url}`,
   });
 };

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { navigateTo } from "@/libs/utils";
+import { navigateTo } from "@/lib/utils";
 import { useMessage } from "@/hooks/useMessage";
 
 const { showTips } = useMessage();
