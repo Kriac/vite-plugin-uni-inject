@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { sayHelloInject } from "@/libs/utils";
+import { sayHelloInject } from "@/lib/utils";
 
 console.log(sayHelloInject());
 </script>

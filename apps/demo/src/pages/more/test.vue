@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useMessage } from "@/hooks/useMessage";
-import { navigateToTutorial } from "@/libs/utils";
+import { navigateToTutorial } from "@/lib/utils";
 
 const { showTips } = useMessage();
 
