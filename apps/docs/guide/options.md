@@ -19,15 +19,15 @@ uniInject({
 | 字段          | 类型       | 默认值             | 说明                                                          |
 | ------------- | ---------- | ------------------ | ------------------------------------------------------------- |
 | `dts`         | `string`   | `"uni-pages.d.ts"` | 相对于 `src` 目录的类型声明输出路径。传入空字符串可关闭生成。 |
-| `mainPackage` | `string`   | `"pages"`          | 主包页面目录。                                                |
-| `subPackages` | `string[]` | `[]`               | 分包根目录列表。插件会扫描每个分包下的 `mainPackage` 目录。   |
+| `pageDirs`    | `string[]` | `["pages"]`        | 主包和分包中的页面目录列表。插件会递归扫描目录中的 Vue 文件。 |
+| `subPackages` | `string[]` | `[]`               | 分包根目录列表，用于扫描并归类对应分包中的页面。              |
 
 示例：
 
 ```ts
 uniAutoPages({
   dts: "./types/uni-pages.d.ts",
-  mainPackage: "pages",
+  pageDirs: ["pages"],
   subPackages: ["subPackages/tutorial"],
 });
 ```
