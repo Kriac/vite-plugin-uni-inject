@@ -64,13 +64,13 @@ export interface AutoPagesPluginOptions {
   dts?: string;
 
   /**
-   * 主包目录
-   * @default 'pages'
+   * 需要扫描的页面目录
+   * @default ['pages']
    */
-  mainPackage?: string;
+  pageDirs?: string[];
 
   /**
-   * 分包列表
+   * 分包目录
    * @default []
    */
   subPackages?: string[];
