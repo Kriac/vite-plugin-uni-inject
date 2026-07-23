@@ -6,7 +6,7 @@ const { showTips } = useMessage();
 
 // 跳转分包注入示例
 const goToSubInject = () => {
-  navigateToTutorial("/pages/index/index");
+  navigateToTutorial("/views/index/index");
 };
 
 console.log("Hello Test Page");
