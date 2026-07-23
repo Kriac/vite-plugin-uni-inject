@@ -16,7 +16,6 @@ export const navigateTo = (url: RoutePath) => {
   });
 };
 
-/** 提取教程分包页面路径 */
 type TutorialRath = ExtractPath<RoutePath, "/subPackages/tutorial">;
 
 /**

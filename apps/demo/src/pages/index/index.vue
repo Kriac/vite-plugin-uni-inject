@@ -4,7 +4,6 @@ import { useMessage } from "@/hooks/useMessage";
 
 const { showTips } = useMessage();
 
-// 跳转测试注入页面
 const goToTestPages = () => {
   navigateTo("/pages/more/test");
 };

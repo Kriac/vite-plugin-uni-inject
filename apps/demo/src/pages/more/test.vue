@@ -4,7 +4,6 @@ import { navigateToTutorial } from "@/libs/utils";
 
 const { showTips } = useMessage();
 
-// 跳转分包注入示例
 const goToSubInject = () => {
   navigateToTutorial("/views/index/index");
 };
