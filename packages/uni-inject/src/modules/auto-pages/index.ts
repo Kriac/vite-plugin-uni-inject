@@ -149,22 +149,28 @@ function collectFileRoutes(srcRoot: string, routeDirs: string[]) {
   };
 }
 
-function getScanDirs(pageDirs: string[], subPackages: string[]) {
-  const dirSet = new Set<string>();
-  for (const pageDir of pageDirs) {
-    const normalizedDir = normalizeDir(pageDir);
-    if (!normalizedDir) {
-      continue;
+function getScanDirs(srcRoot: string, pageDirs: string[]) {
+  const normalizedPageDirs = pageDirs.map(normalizeDir).filter(Boolean);
+  const scanDirs: string[] = [];
+  function walkDirs(dirPath: string) {
+    const relativeDir = toPosixPath(path.relative(srcRoot, dirPath));
+    const matched = normalizedPageDirs.some((pageDir) => {
+      return relativeDir === pageDir || relativeDir.endsWith(`/${pageDir}`);
+    });
+    if (matched) {
+      scanDirs.push(relativeDir);
+      return;
     }
-    dirSet.add(normalizedDir);
-    for (const subPackage of subPackages) {
-      const normalizedSubPackage = normalizeDir(subPackage);
-      if (normalizedSubPackage) {
-        dirSet.add(`${normalizedSubPackage}/${normalizedDir}`);
+
+    const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+    for (const entry of entries) {
+      if (entry.isDirectory()) {
+        walkDirs(path.join(dirPath, entry.name));
       }
     }
   }
-  return Array.from(dirSet);
+  walkDirs(srcRoot);
+  return scanDirs;
 }
 
 function buildPages(
@@ -316,7 +322,7 @@ export default function uniAutoPages(opts?: AutoPagesPluginOptions) {
 
       const { routes, analysisMap } = collectFileRoutes(
         srcRoot,
-        getScanDirs(pageDirs, subPackages),
+        getScanDirs(srcRoot, pageDirs),
       );
       const merged = getPagesByFileRoute(
         routes,
