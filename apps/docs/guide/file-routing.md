@@ -10,11 +10,10 @@
 src/
 ├─ pages/
 │  ├─ index/index.vue
-│  └─ more/test.vue
 └─ sub-packages/
    └─ tutorial/
     └─ views/
-      └─ index/index.vue
+      └─ index.vue
 ```
 
 通过 `pageDirs` 指定要扫描的页面目录，通过 `subPackages` 可以声明分包根目录：
@@ -40,9 +39,6 @@ export default defineConfig({
   "pages": [
     {
       "path": "pages/index/index"
-    },
-    {
-      "path": "pages/more/test"
     }
   ],
   "subPackages": [
@@ -50,7 +46,7 @@ export default defineConfig({
       "root": "sub-packages/tutorial",
       "pages": [
         {
-          "path": "views/index/index"
+          "path": "views/index"
         }
       ]
     }
@@ -58,7 +54,7 @@ export default defineConfig({
 }
 ```
 
-每个页面目录都会被递归扫描，因此目录名称和内部层级不受限制。
+插件会在 `src` 下递归匹配 `pageDirs` 中配置的目录名或相对路径，并递归扫描其中的 Vue 文件，因此页面目录可以位于任意层级。
 
 `pages.json` 中已有的其他顶层配置会被保留，例如 `globalStyle`、`easycom` 等。
 
