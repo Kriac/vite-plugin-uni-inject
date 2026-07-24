@@ -5,7 +5,7 @@ import { useMessage } from "@/hooks/useMessage";
 const { showTips } = useMessage();
 
 const goToTestPages = () => {
-  navigateTo("/pages/more/test");
+  navigateTo("/modules/example/pages/test");
 };
 
 definePage({

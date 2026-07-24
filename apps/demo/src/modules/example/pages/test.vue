@@ -5,7 +5,7 @@ import { navigateToTutorial } from "@/lib/utils";
 const { showTips } = useMessage();
 
 const goToSubInject = () => {
-  navigateToTutorial("/views/index/index");
+  navigateToTutorial("/views/index");
 };
 
 console.log("Hello Test Page");
