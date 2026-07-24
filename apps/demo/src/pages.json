@@ -18,7 +18,7 @@
       }
     },
     {
-      "path": "pages/more/test"
+      "path": "modules/example/pages/test"
     }
   ],
   "subPackages": [
@@ -26,7 +26,7 @@
       "root": "sub-packages/tutorial",
       "pages": [
         {
-          "path": "views/index/index"
+          "path": "views/index"
         }
       ]
     }

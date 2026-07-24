@@ -14,9 +14,9 @@ export type ExtractPath<
  * 路由路径
  */
 export type RoutePath =
+  | "/modules/example/pages/test"
   | "/pages/index/index"
-  | "/pages/more/test"
-  | "/sub-packages/tutorial/views/index/index";
+  | "/sub-packages/tutorial/views/index";
 
 declare global {
   /**
