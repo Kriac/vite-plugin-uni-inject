@@ -89,7 +89,7 @@ export interface AutoPagesPluginOptions {
   dts?: string;
 
   /**
-   * 需要扫描的页面目录
+   * 页面目录
    * @default ['pages']
    */
   pageDirs?: string[];
